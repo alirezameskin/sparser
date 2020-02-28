@@ -2,7 +2,7 @@
 Dynamic String Parser library
 
 
-## Examples
+## Examples (Arithmetic)
 ```scala
 
   import sparser.arithmetic
@@ -27,4 +27,12 @@ Dynamic String Parser library
 
   val res5 = arithmetic.evaluate("rnd(450)")
   //res5: Left(Invalid Operation(Unary) rnd(450.0))
+```
+
+## Examples (Template)
+```scala
+  import sparser.template
+
+  val result = template.evaluate("Result {{ placeholder | upper }}", Map("placeholder" -> "value1"))
+  //result Right(Result VALUE1)
 ```
