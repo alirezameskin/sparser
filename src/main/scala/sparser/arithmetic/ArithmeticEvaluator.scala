@@ -1,5 +1,7 @@
 package sparser.arithmetic
 
+import sparser.util.sequence
+
 object ArithmeticEvaluator {
 
   def eval(token: Token, vars: String => Option[Double]): Either[String, Double] =
@@ -35,11 +37,5 @@ object ArithmeticEvaluator {
             val args = vs.mkString(",")
             Left(s"Invalid function call: $op($args)")
         }
-    }
-
-  def sequence[A, B](ls: List[Either[A, B]]): Either[A, List[B]] =
-    ls.foldRight(Right(List.empty[B]): Either[A, List[B]]) { (e, acc) =>
-      for (r  <- e;
-           rs <- acc) yield r :: rs
     }
 }
