@@ -15,7 +15,7 @@ class TemplateSpec extends AnyFunSuite {
   }
 
   test("Simple expression with two functions") {
-    val result = evaluate("Result {{ placeholder | upper | lower}}", Map("placeholder" -> "valUe1"))
-    result shouldBe Right("Result value1")
+    val result = evaluate("Result {{ placeholder | upper | lower | quote}}", Map("placeholder" -> "valUe1"))
+    result shouldBe Right("Result \"value1\"")
   }
 }
