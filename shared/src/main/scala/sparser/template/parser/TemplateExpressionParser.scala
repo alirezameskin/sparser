@@ -1,22 +1,26 @@
 package sparser.template.parser
 
-import sparser.template.BaseRegexParser
+import sparser.template.FunctionCall
 import sparser.template.tokenizer._
-import sparser.util.sequence
+import sparser.util.{sequence, BaseRegexParser}
 
 object TemplateExpressionParser extends BaseRegexParser {
 
   def variable: Parser[Variable] =
     ident ~ rep(ident | ".") ^^ (n => Variable(n._1 + n._2.mkString("")))
 
+  def param: Parser[String] = """[0-9a-zA-Z"]+""".r
+
   def function: Parser[FunctionCall] =
-    ident ^^ FunctionCall
+    ident ~ rep(param) ^^ {
+      case func ~ args => FunctionCall(func, args)
+    }
 
   def expression: Parser[TemplateAST] =
     variable ~ rep("|" ~ function) ^^ {
       case v ~ op =>
         op.foldLeft[TemplateAST](v) {
-          case (d1, _ ~ op) => Operation(op.func, d1)
+          case (d1, _ ~ op) => Operation(op, d1)
         }
     }
 
