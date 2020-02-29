@@ -12,8 +12,6 @@ ThisBuild / licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICEN
 ThisBuild / scalaVersion := scala213
 ThisBuild / crossScalaVersions := supportedScalaVersions
 
-//coverageEnabled := true
-
 lazy val root = project
   .in(file("."))
   .aggregate(sparser.js, sparser.jvm)
@@ -37,7 +35,8 @@ lazy val sparser = crossProject(JSPlatform, JVMPlatform)
     )
   )
   .jvmSettings(
-    )
+    coverageEnabled := true
+  )
   .jsSettings(
     libraryDependencies += "org.scala-lang.modules" %%% "scala-parser-combinators" % scalaParserVersion
   )
