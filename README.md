@@ -34,8 +34,11 @@ Dynamic String Parser library
   import sparser.template
 
   val res0 = template.evaluate("Result {{ placeholder | upper }}", Map("placeholder" -> "value1"))
-  //resRight(Result VALUE1)
+  //res0: Right(Result VALUE1)
 
   val res1 = template.evaluate("Result {{ placeholder | lower | quote }}", Map("placeholder" -> "value1"))
-  //result Right(Result "value1")
+  //res1: Right(Result "value1")
+
+  val res2 = template.evaluate("{{name | repeat 3}}", Map("name" -> "Alireza "))
+  //res2: Right(Alireza Alireza Alireza)
 ```

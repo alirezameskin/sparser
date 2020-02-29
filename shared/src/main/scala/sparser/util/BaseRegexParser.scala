@@ -1,4 +1,4 @@
-package sparser.template
+package sparser.util
 
 import scala.util.matching.Regex
 import scala.util.parsing.combinator.JavaTokenParsers

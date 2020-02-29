@@ -2,6 +2,7 @@ package sparser.template.parser
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers._
+import sparser.template.FunctionCall
 import sparser.template.tokenizer.{Expression, PlainText}
 
 class TemplateParserSpec extends AnyFunSuite {
@@ -14,9 +15,10 @@ class TemplateParserSpec extends AnyFunSuite {
   }
 
   test("Test with pipe") {
-    val expr     = List(PlainText("Name"), Expression("name | upper | lower"))
-    val tokens   = TemplateExpressionParser(expr)
-    val expected = List(Text("Name"), Operation("lower", Operation("upper", Variable("name"))))
+    val expr   = List(PlainText("Name"), Expression("name | upper | lower"))
+    val tokens = TemplateExpressionParser(expr)
+    val expected =
+      List(Text("Name"), Operation(FunctionCall("lower"), Operation(FunctionCall("upper"), Variable("name"))))
 
     tokens shouldBe Right(expected)
   }

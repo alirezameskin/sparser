@@ -18,4 +18,9 @@ class TemplateSpec extends AnyFunSuite {
     val result = evaluate("Result {{ placeholder | upper | lower | quote}}", Map("placeholder" -> "valUe1"))
     result shouldBe Right("Result \"value1\"")
   }
+
+  test("Repeat function should work") {
+    val result = evaluate("Repeat word three times, {{ var | upper | repeat 3}}", Map("var" -> "word,"))
+    result shouldBe Right("Repeat word three times, WORD,WORD,WORD,")
+  }
 }

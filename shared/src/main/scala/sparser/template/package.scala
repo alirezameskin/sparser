@@ -5,8 +5,11 @@ import sparser.template.tokenizer.TemplateTokenizer
 import sparser.util.sequence
 
 package object template {
+  case class FunctionCall(func: String, args: Seq[String] = Nil)
 
-  def evaluate[A](str: String, vars: Map[String, String]): Either[String, String] =
+  implicit def functionResolver = DefaultFunctionResolver
+
+  def evaluate[A](str: String, vars: Map[String, String])(implicit R: FunctionResolver): Either[String, String] =
     evaluate(str, e => vars.get(e))
 
   def evaluate(str: String, vars: String => Option[String]): Either[String, String] =

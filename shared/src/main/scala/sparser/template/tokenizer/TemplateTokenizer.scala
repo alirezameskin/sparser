@@ -1,6 +1,6 @@
 package sparser.template.tokenizer
 
-import sparser.template.BaseRegexParser
+import sparser.util.BaseRegexParser
 
 object TemplateTokenizer extends BaseRegexParser {
   val expressionRegex = """\{\{[a-z_A-Z0-9\|\s\.]+\}\}""".r

@@ -1,4 +1,4 @@
-package sparser.template
+package sparser.util
 
 //Copy of `scala.util.parsing.combinator.SubSequence`
 

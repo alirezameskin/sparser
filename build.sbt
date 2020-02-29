@@ -9,7 +9,7 @@ ThisBuild / organization := "com.github.alirezameskin"
 ThisBuild / homepage := Some(url("https://github.com/alirezameskin/sparser"))
 ThisBuild / licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
 
-ThisBuild / scalaVersion := scala213
+ThisBuild / scalaVersion := scala212
 ThisBuild / crossScalaVersions := supportedScalaVersions
 
 lazy val root = project
