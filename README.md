@@ -42,3 +42,16 @@ Dynamic String Parser library
   val res2 = template.evaluate("{{name | repeat 3}}", Map("name" -> "Alireza "))
   //res2: Right(Alireza Alireza Alireza)
 ```
+
+## Examples (Conditional)
+```scala
+  import sparser.conditional
+
+  val res0 = conditional.evaluate("status:200", Map("status" -> 200))
+  //res0 : Right(true)
+
+  val vars1 = Map("status" -> 200, "count" -> 120, "size" -> 200)
+  val res1 = conditional.evaluate("status <= 200 AND (count:[0 TO 100] OR size:200)", vars1)
+  //res1: Right(true)
+
+```

@@ -13,7 +13,7 @@ class ConditionalParserSpec extends AnyFunSuite {
   }
 
   test("Between condition") {
-    val token    = ConditionalParser("status: [200 to 299]")
+    val token    = ConditionalParser("status:[200 TO 299]")
     val expected = Between(Variable("status"), 200d, 299d)
 
     token shouldBe Right(expected)
@@ -96,6 +96,66 @@ class ConditionalParserSpec extends AnyFunSuite {
       ),
       Equal(Variable("size"), 200d)
     )
+
+    token shouldBe Right(expected)
+  }
+
+  test("And and OR conditions inside parenthesis") {
+    val token = ConditionalParser("status <= 200 AND (count:[0 TO 100] OR size:200)")
+    val expected = And(
+      LessEqual(Variable("status"), 200d),
+      Or(
+        Between(Variable("count"), 0d, 100d),
+        Equal(Variable("size"), 200d)
+      )
+    )
+
+    token shouldBe Right(expected)
+  }
+
+  test("OR and AND conditions inside parenthesis") {
+    val token = ConditionalParser("(status <= 200 AND count:[0 TO 100]) OR size:200")
+    val expected = Or(
+      And(
+        LessEqual(Variable("status"), 200d),
+        Between(Variable("count"), 0d, 100d)
+      ),
+      Equal(Variable("size"), 200d)
+    )
+
+    token shouldBe Right(expected)
+  }
+
+  test("whole And and OR conditions inside parenthesis") {
+    val token = ConditionalParser("(status <= 200 AND (count:[0 TO 100] OR size:200))")
+    val expected = And(
+      LessEqual(Variable("status"), 200d),
+      Or(
+        Between(Variable("count"), 0d, 100d),
+        Equal(Variable("size"), 200d)
+      )
+    )
+
+    token shouldBe Right(expected)
+  }
+
+  test("Quoted strings") {
+    val token    = ConditionalParser("""level:"error message" """)
+    val expected = Equal(Variable("level"), "error message")
+
+    token shouldBe Right(expected)
+  }
+
+  test("Not Quoted strings") {
+    val token    = ConditionalParser("""level:Info""")
+    val expected = Equal(Variable("level"), "Info")
+
+    token shouldBe Right(expected)
+  }
+
+  test("Not condition") {
+    val token    = ConditionalParser("""NOT level:"Info" """)
+    val expected = Not(Equal(Variable("level"), "Info"))
 
     token shouldBe Right(expected)
   }
