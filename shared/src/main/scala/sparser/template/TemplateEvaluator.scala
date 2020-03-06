@@ -13,7 +13,7 @@ object TemplateEvaluator {
       case Variable(name) => vars(name).toRight[String](s"Invalid Variable ${name}")
       case Operation(op, e1) =>
         for {
-          f  <- function(op, s"Invalid Function $op")
+          f  <- function(op, s"Invalid Function $op")(R)
           v1 <- eval(e1, vars)
         } yield f(v1)
     }

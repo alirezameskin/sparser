@@ -2,7 +2,6 @@ package sparser.template.parser
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers._
-import sparser.template.FunctionCall
 import sparser.template.tokenizer.{Expression, PlainText}
 
 class TemplateParserSpec extends AnyFunSuite {

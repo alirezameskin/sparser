@@ -1,6 +1,5 @@
 package sparser.template.parser
 
-import sparser.template.FunctionCall
 import sparser.template.tokenizer._
 import sparser.util.{sequence, BaseRegexParser}
 
