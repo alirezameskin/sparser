@@ -24,6 +24,7 @@ lazy val root = project
 
 lazy val sparser = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
+  .settings(Settings.commonSettings)
   .settings(
     name := "sparser",
     resolvers += Resolver.sonatypeRepo("releases"),
