@@ -1,6 +1,23 @@
 # sparser
 Dynamic String Parser library
 
+## Adding an sbt dependency
+To depend on sparser in sbt, add something like this to your build.sbt:
+
+```scala
+resolvers += "sparser" at "https://dl.bintray.com/meskin/sparser/"
+
+libraryDependencies += "com.github.alirezameskin" %% "sparser" % "0.0.3" 
+```
+### Scala.js
+Sparser is also available for Scala.js :
+
+```scala
+resolvers += "sparser" at "https://dl.bintray.com/meskin/sparser/"
+
+libraryDependencies += "com.github.alirezameskin" %%% "sparser" % "0.0.3" 
+```
+
 
 ## Examples (Arithmetic)
 ```scala
