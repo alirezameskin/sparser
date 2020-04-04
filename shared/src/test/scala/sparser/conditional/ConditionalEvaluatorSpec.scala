@@ -39,7 +39,7 @@ class ConditionalEvaluatorSpec extends AnyFunSuite {
   }
 
   test("two OR conditions") {
-    val vars1 = Map("status" -> 201, "count" -> 120, "size" -> 200)
+    val vars1 = Map("status" -> 201d, "count" -> 120d, "size" -> 200d)
     evaluate("status <= 200 OR count:[0 TO 100] OR size:200", vars1) shouldBe Right(true)
 
     val vars2 = Map("status" -> 201, "count" -> 120, "size" -> 201)
