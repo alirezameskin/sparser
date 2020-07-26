@@ -3,6 +3,8 @@ package sparser.template.tokenizer
 import sparser.util.BaseRegexParser
 
 object TemplateTokenizer extends BaseRegexParser {
+  override def skipWhitespace = false
+
   val expressionRegex = """\{\{[a-z_A-Z0-9\|\s\.]+\}\}""".r
 
   def plainText: Parser[PlainText] =

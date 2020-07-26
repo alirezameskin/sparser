@@ -71,4 +71,11 @@ class TokenizerSpec extends AnyFunSuite {
     val expected = List(PlainText("Test string "), Expression("name | upper"))
     tokens shouldBe Right(expected)
   }
+
+  test("Templates with space separator") {
+    val tokens   = TemplateTokenizer("{{ firstName }}  {{ lastName}}")
+    val expected = List(Expression("firstName"), PlainText("  "), Expression("lastName"))
+
+    tokens shouldBe Right(expected)
+  }
 }
