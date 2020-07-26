@@ -36,7 +36,8 @@ lazy val sparser = crossProject(JSPlatform, JVMPlatform)
     )
   )
   .jvmSettings(
-    coverageEnabled := true
+    coverageEnabled in (Test, compile) := true,
+    coverageEnabled in (Compile, compile) := false
   )
   .jsSettings(
     libraryDependencies += "org.scala-lang.modules" %%% "scala-parser-combinators" % scalaParserVersion
